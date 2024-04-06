@@ -52,19 +52,22 @@ const BottomTabBar = () => {
   const location = useLocation();
 
   return (
-    <div className="tabBarContainer">
-      {TabsPages.map(({ path, activeIcon, inActiveIcon, title }, index) => {
-        const isActive = location.pathname === path;
-        return (
-          <div
-            key={`bottom-tab-item-${index}-${path}`}
-            className={`tabItem ${isActive ? "active" : ""}`}
-            onClick={() => navigate(path)}
-          >
-            <img src={isActive ? activeIcon : inActiveIcon} alt={title} />
-          </div>
-        );
-      })}
+    <div className="tabBarRootContainer">
+      <div className="tabBarContainer">
+        {TabsPages.map(({ path, activeIcon, inActiveIcon, title }, index) => {
+          const isActive = location.pathname === path;
+          const Icon = isActive ? activeIcon : inActiveIcon;
+          return (
+            <div
+              key={`bottom-tab-item-${index}-${path}`}
+              className={`tabItem ${isActive ? "active" : ""}`}
+              onClick={() => navigate(path)}
+            >
+              <Icon   fill={'var(--opposite-color)'}/>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
